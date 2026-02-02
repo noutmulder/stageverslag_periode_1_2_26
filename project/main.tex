@@ -1,7 +1,7 @@
 \documentclass[a4paper, 12pt]{article} 
 
 % ---------- Packages ----------
-\usepackage[dutch]{babel}               
+\usepackage[english]{babel}             
 \usepackage[utf8]{inputenc}             
 \usepackage[T1]{fontenc}                
 \usepackage{geometry}                   
@@ -34,104 +34,169 @@
   bottom=2cm
 }
 
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\itshape Internship Report DeVi Comfort \textbullet{} 2026}
+\fancyhead[R]{\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
 % ---------- Title ----------
-\title{Onderzoeksverslag Stage Periode 1 en 2}
-\author{Naam Student}
+\title{Internship Research Report Period 1 and 2}
+\author{Nout Mulder}
 \date{2026}
 
 % ---------- Document ----------
 \begin{document}
 
-% ---------- Title Page ----------
-\hypersetup{pageanchor=false}
-\begin{titlepage}
-    \centering
-    \vspace*{2cm}
-    {\huge\bfseries Onderzoeksverslag Stage\par}
-    \vspace{1cm}
-    {\Large Periode 1 en 2\par}
+% ---------- Journal-style Title Block ----------
+\thispagestyle{fancy}
+\vspace*{0.5cm}
+{\small\itshape Internship Report DeVi Comfort. 2026; 1(1): 1--\pageref{LastPage}\par}
+\vspace{0.2cm}
+\hrule
+\vspace{0.6cm}
+\begin{center}
+{\Large\bfseries INTERNSHIP RESEARCH REPORT PERIOD 1 AND 2\par}
+\vspace{0.3cm}
+{\normalsize Nout Mulder\par}
+\vspace{0.2cm}
+{\small DeVi Comfort \textbullet{} Engineering \textbullet{} Opmeer\par}
+\end{center}
+\vspace{0.4cm}
+\hrule
+\vspace{0.6cm}
 
-    \vspace{2cm}
+\section*{SUMMARY}
+\setlength{\parskip}{6pt}
+This research focuses on developing a 3D visualization (``virtual ghost'') to make
+faults and deviations in position and movement of a stairlift faster and more
+intuitive to interpret within DeVi Comfort. The assignment is carried out
+iteratively with prototyping and evaluation based on practical scenarios.
+\vspace{0.4cm}
+\hrule
+\vspace{0.6cm}
 
-    {\Large\textbf{Stagebedrijf}\par}
-    Bedrijfsnaam
-
-    \vspace{1.5cm}
-
-    {\Large\textbf{Opleiding}\par}
-    Opleidingsnaam
-
-    \vfill
-
-    {\Large Naam Student\par}
-    \vspace{0.5cm}
-    2026
-\end{titlepage}
-\hypersetup{pageanchor=true}
-
-\tableofcontents
-\newpage
+\setlength{\columnsep}{0.8cm}
+\begin{multicols}{2}
 
 % ============================================================
-\section{Inleiding}
+\section{Introduction}
 
 \subsection{Context}
+DeVi Comfort designs and produces stairlift systems and develops the accompanying
+software in-house. The company continually works on reliability, safety and
+maintainability of the product. During service and further development it is
+important that faults can be recognized and analyzed quickly.
 
-\subsection{Aanleiding}
+\subsection{Motivation}
+Textual fault information and error codes are correct, but in practice it takes
+time to interpret them properly. When the cause of a fault is not quickly clear,
+this leads to additional diagnosis time, longer downtime and higher support and
+service costs. A clear visual representation of position, movement and deviations
+can reduce this.
 
-\subsection{Doel van het Onderzoek}
+\subsection{Research Goal}
+The goal is to develop a 3D visualization (``virtual ghost'') that shows the
+stairlift on the rail and provides insight into movement and status. This should
+make faults and warnings faster and more intuitive to interpret, so that diagnosis
+and recovery are more efficient.
 
-\subsection{Leeswijzer}
-
-% ============================================================
-\section{Probleemstelling}
-
-\subsection{Probleembeschrijving}
-
-\subsection{Hoofdvraag}
-
-\subsection{Deelvragen}
-
-% ============================================================
-\section{Theoretisch Kader}
-
-\subsection{Achtergrondinformatie}
-
-\subsection{Relevante Theorie}
-
-\subsection{Bestaande Oplossingen}
+\subsection{Reading Guide}
+Chapter 2 describes the problem statement and research questions. Chapter 3 provides
+the theoretical framework. Chapter 4 describes the method. Chapter 5 presents the
+results. Chapter 6 concludes with the conclusion and recommendations.
 
 % ============================================================
-\section{Methode}
+\section{Problem Statement}
 
-\subsection{Onderzoeksaanpak}
+\subsection{Problem Description}
+Faults and warnings of the stairlift are not always immediately understandable
+based only on error codes and status bits. As a result, it is difficult to quickly
+determine whether the stairlift is moving correctly, has lost its position, or is
+in a fault condition. This slows down diagnosis and recovery.
 
-\subsection{Onderzoeksmethoden}
+\subsection{Main Question}
+Which data and design choices are needed to develop a 3D ``virtual ghost'' visualization
+that makes faults and deviations in position and movement of a stairlift understandable
+for fault analysis within DeVi Comfort?
 
-\subsection{Tools en Technieken}
-
-% ============================================================
-\section{Resultaten}
-
-\subsection{Bevindingen}
-
-\subsection{Analyse}
-
-\subsection{Overzicht Resultaten}
-
-% ============================================================
-\section{Conclusie}
-
-\subsection{Beantwoording Hoofdvraag}
-
-\subsection{Belangrijkste Inzichten}
-
-\subsection{Aanbevelingen}
+\subsection{Subquestions}
+\begin{itemize}[leftmargin=*]
+  \item Which faults and warnings are most relevant to visualize?
+  \item Which technical inputs (position, speed, status, error codes) are needed for a reliable and stable 3D representation?
+  \item How is the expected position determined and how is the difference with the measured position calculated and interpreted?
+  \item Which visualization forms make deviations between expected and measured position most understandable for engineers and service?
+  \item How can the prototype be validated with practical scenarios (e.g., impact on interpretation errors and diagnosis time)?
+\end{itemize}
 
 % ============================================================
+\section{Theoretical Framework}
+
+\subsection{Background Information}
+DeVi Comfort works with complete stairlift systems in which mechanics, electronics
+and software come together. For maintenance and service, insight into the current
+and expected position of the lift is essential.
+
+\subsection{Relevant Theory}
+Relevant themes include system diagnostics, visualization of technical status
+information and interpreting deviations between measured and expected values in
+mechatronic systems.
+
+\subsection{Existing Solutions}
+Within DeVi Comfort, fault information is currently offered primarily as text.
+This research explores how a 3D visualization can complement this for faster
+interpretation.
+
+% ============================================================
+\section{Method}
+
+\subsection{Research Approach}
+The assignment is carried out iteratively with prototyping and evaluation. The cycle
+consists of analysis, design, implementation and validation based on practical
+scenarios and measurable results.
+
+\subsection{Research Methods}
+Methods include document analysis, requirements analysis, visualization design,
+prototyping and evaluation with involved engineers and service.
+
+\subsection{Tools and Techniques}
+Work is done with a 3D visualization environment (``virtual ghost'') and data from
+stairlift controllers such as position, speed, status and error codes.
+
+% ============================================================
+\section{Results}
+
+\subsection{Findings}
+To be completed based on analysis and prototyping.
+
+\subsection{Analysis}
+To be completed based on evaluations and measurements.
+
+\subsection{Results Overview}
+To be completed based on the final results.
+
+% ============================================================
+\section{Conclusion}
+
+\subsection{Answer to Main Question}
+To be completed after the research is finished.
+
+\subsection{Key Insights}
+To be completed after the research is finished.
+
+\subsection{Recommendations}
+To be completed after the research is finished.
+
+% ============================================================
+\end{multicols}
+
 \newpage
 \bibliographystyle{plainnat}
 \bibliography{bibliography}
+
+\label{LastPage}
 
 % ============================================================
 
